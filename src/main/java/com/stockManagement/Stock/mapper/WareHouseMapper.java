@@ -16,8 +16,9 @@ public interface WareHouseMapper {
 
     WareHouseEntity toEntity(WareHouseDTO dto);
 
-
     WareHouseDTO toDTO(WareHouseEntity wareHouse);
 
     CreateWareHouseResponse toCreateResponse(WareHouseDTO response);
+
+    WareHouseDTO toDTO(WareHouseDTO response);
 }

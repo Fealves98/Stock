@@ -33,6 +33,7 @@ def swaggerVersion = "2.9.2"
 def wiremockVersion = "2.2.4.RELEASE"
 
 dependencies {
+	compile group: 'com.netflix.hystrix', name: 'hystrix-core', version: '1.5.18'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'

@@ -4,6 +4,7 @@ import com.stockManagement.Stock.dto.ProductDTO;
 import com.stockManagement.Stock.entity.ProductEntity;
 import com.stockManagement.Stock.web.request.CreateProductRequest;
 import com.stockManagement.Stock.web.request.RetrieveProductRequest;
+import com.stockManagement.Stock.web.request.UpdateProductRequest;
 import com.stockManagement.Stock.web.response.CreateProductResponse;
 import com.stockManagement.Stock.web.response.RetrieveProductRespose;
 import org.mapstruct.Mapper;
@@ -25,4 +26,6 @@ public interface ProductMapper {
     CreateProductResponse toCreateResponse(ProductDTO response);
 
     RetrieveProductRespose toResponse( final ProductDTO dto);
+
+    ProductDTO toDTO(UpdateProductRequest request);
 }

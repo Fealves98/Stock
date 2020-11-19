@@ -3,6 +3,7 @@ package com.stockManagement.Stock.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -15,5 +16,6 @@ public class WareHouseEntity {
     private Long idWareHouse;
     @Column(name = "name_WareHouse")
     private String nameWareHouse;
+
 
 }
