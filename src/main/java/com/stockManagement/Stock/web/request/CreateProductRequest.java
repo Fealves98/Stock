@@ -14,6 +14,6 @@ public class CreateProductRequest {
     private BigDecimal purchasePrice;
     private BigDecimal salePrice;
     private Long amount;
-    private WareHouseEntity wareHouse;
+    private ProductWareHouseRequest wareHouse;
 
 }

@@ -8,4 +8,6 @@ public class RetrieveProductRequest {
 
     private Long idProduct;
     private String name;
+    private ProductWareHouseRequest wareHouse;
+
 }

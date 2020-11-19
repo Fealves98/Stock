@@ -14,6 +14,6 @@ public class ProductDTO {
     private BigDecimal purchasePrice;
     private BigDecimal salePrice;
     private Long amount;
-    private WareHouseEntity wareHouse;
+    private WareHouseDTO wareHouse;
 
 }
