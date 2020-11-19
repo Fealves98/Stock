@@ -15,4 +15,5 @@ public class WareHouseEntity {
     private Long idWareHouse;
     @Column(name = "name_WareHouse")
     private String nameWareHouse;
+
 }

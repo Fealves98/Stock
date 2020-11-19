@@ -1,14 +1,17 @@
 package com.stockManagement.Stock.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "product")
+@JsonSerialize
 public class ProductEntity {
 
     @Id
@@ -22,7 +25,7 @@ public class ProductEntity {
     @Column(name = "sale_price")
     private BigDecimal salePrice;
     private Long amount;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
  //   @JoinColumn(name = "idWareHouse", columnDefinition = "BIGINT",nullable = true)
     private WareHouseEntity wareHouse;
 
