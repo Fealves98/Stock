@@ -6,5 +6,9 @@ import lombok.Data;
 public class CreateWareHouseRequest {
 
     private Long idWareHouse;
+
     private String nameWareHouse;
+
+    private Long idStore;
+
 }

@@ -1,6 +1,8 @@
 package com.stockManagement.Stock.service;
 
 import com.stockManagement.Stock.dto.ProductDTO;
+import com.stockManagement.Stock.entity.ProductEntity;
+import com.stockManagement.Stock.entity.WareHouseEntity;
 import com.stockManagement.Stock.exception.ConstraintViolationException;
 import com.stockManagement.Stock.exception.Exception;
 import com.stockManagement.Stock.exception.ResourceNotFoundException;
@@ -29,15 +31,10 @@ public class ProductService {
 
 
     public ProductDTO create(final ProductDTO dto) {
-        var search = this.wareHouseRepository.findById(dto.getWareHouse().getIdWareHouse())
-                .orElseThrow(() -> new Exception("Informed WareHouse does not exist"));
-        System.out.println("222222222222222222222" + search.getIdWareHouse());
-
+        var search = this.retrieveByIdWareHouse(dto.getWareHouse().getIdWareHouse());
         final var entity = this.productMapper.toEntity(dto);
         final var product = this.productRepository.save(entity);
-        //if(product.getWareHouse())
         return this.productMapper.toDTO(product);
-
     }
 
     public Page<ProductDTO> retrieve(final ProductDTO dto, final Pageable pageable) {
@@ -45,46 +42,46 @@ public class ProductService {
         final var example = of(this.productMapper.toEntity(dto));
         final var result = this.productRepository.findAll(example, pageable);
         return result.map(this.productMapper::toDTO);
-
     }
 
     public void alterProperties(Long idProduct, ProductDTO dto) {
         log.info("m=alterProperties, idProduct={}, dto={}", idProduct, dto);
-
-        var entity = this.productRepository.findById(idProduct)
-                .orElseThrow(() -> new ResourceNotFoundException("Product not Found " + idProduct));
-
-        var search = this.wareHouseRepository.findById(dto.getWareHouse().getIdWareHouse())
-                .orElseThrow(() -> new ConstraintViolationException("Informed WareHouse does not exist"));
-
+        var entity = this.retrieveById(idProduct);
+        var search = this.retrieveByIdWareHouse(dto.getWareHouse().getIdWareHouse());
         if (dto.getName() != null) {
             entity.setName(dto.getName());
         }
-
         if (dto.getDescription() != null) {
             entity.setDescription(dto.getDescription());
         }
-
         if (dto.getPurchasePrice() != null) {
             entity.setPurchasePrice(dto.getPurchasePrice());
         }
-
         if (dto.getSalePrice() != null) {
             entity.setSalePrice(dto.getSalePrice());
         }
-
         if (dto.getWareHouse().getIdWareHouse() != null) {
-
             final var wareHouse = this.wareHouseMapper.toEntity(dto.getWareHouse());
             wareHouse.setIdWareHouse(dto.getWareHouse().getIdWareHouse());
             entity.setWareHouse(wareHouse);
-
         }
-
         this.productRepository.save(entity);
-
     }
 
+    public void delete(final Long idProduct) {
+        final var entity = this.retrieveById(idProduct);
+        this.productRepository.delete(entity);
+    }
+
+    private ProductEntity retrieveById(Long idProduct) {
+        return this.productRepository.findById(idProduct)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not Found " + idProduct));
+    }
+
+    private WareHouseEntity retrieveByIdWareHouse(Long idWareHouse) {
+        return this.wareHouseRepository.findById(idWareHouse)
+                .orElseThrow(() -> new ResourceNotFoundException("Informed WareHouse does not exist"));
+    }
 }
 
 

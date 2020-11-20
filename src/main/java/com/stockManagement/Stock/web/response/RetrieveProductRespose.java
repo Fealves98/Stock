@@ -9,11 +9,17 @@ import java.math.BigDecimal;
 public class RetrieveProductRespose {
 
     private Long idProduct;
+
     private String name;
+
     private String description;
+
     private BigDecimal purchasePrice;
+
     private BigDecimal salePrice;
+
     private Long amount;
+
     private WareHouseEntity wareHouse;
 
 }

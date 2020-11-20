@@ -8,5 +8,8 @@ import javax.persistence.Column;
 public class CreateWareHouseResponse {
 
     private Long idWareHouse;
+
     private String nameWareHouse;
+
+    private Long idStore;
 }

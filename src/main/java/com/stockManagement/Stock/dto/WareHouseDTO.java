@@ -7,6 +7,8 @@ import lombok.Data;
 public class WareHouseDTO {
 
     private Long idWareHouse;
-    @ApiModelProperty(hidden = true)
+
     private String nameWareHouse;
+
+    private Long idStore;
 }

@@ -16,6 +16,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Positive;
+
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
@@ -31,7 +34,7 @@ public class StockController {
     @PostMapping
     @ResponseStatus(CREATED)
     @ApiOperation("Cadastra Produto no sistema")
-    public CreateProductResponse create(@RequestBody CreateProductRequest request) {
+    public CreateProductResponse create(@Valid @RequestBody CreateProductRequest request) {
         log.info("m=create, request={}", request);
         final var dto = this.mapper.toDTO(request);
         final var response = this.service.create(dto);
@@ -53,9 +56,17 @@ public class StockController {
     @ApiOperation("Atualiza um Produto")
     public void update(@PathVariable Long idProduct, @RequestBody UpdateProductRequest request) {
         log.info("m=update, idProduct={}, request={}", idProduct, request);
-
         final var dto = this.mapper.toDTO(request);
         this.service.alterProperties(idProduct, dto);
+
+    }
+
+    @DeleteMapping("/{idProduct}")
+    @ResponseStatus(NO_CONTENT)
+    @ApiOperation("Deleta um produto")
+    public void delete(@PathVariable Long idProduct) {
+        log.info("m=update, idProduct={}", idProduct);
+        this.service.delete(idProduct);
 
     }
 }

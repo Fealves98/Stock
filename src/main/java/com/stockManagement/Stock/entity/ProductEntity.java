@@ -6,6 +6,7 @@ import lombok.Data;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -31,7 +32,8 @@ public class ProductEntity {
     private BigDecimal salePrice;
 
     private Long amount;
-    @JoinColumn(name = "id_WareHouse" )
+
+    @JoinColumn(name = "id_WareHouse")
     @ManyToOne(fetch = FetchType.EAGER)
     private WareHouseEntity wareHouse;
 

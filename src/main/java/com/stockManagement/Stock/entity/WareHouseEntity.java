@@ -12,10 +12,15 @@ public class WareHouseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_WareHouse")
+    @Column(name = "id_warehouse")
     private Long idWareHouse;
-    @Column(name = "name_WareHouse")
+
+    @Column(name = "name_warehouse")
     private String nameWareHouse;
+
+    @Column(name = "id_store")
+    private Long idStore;
+
 
 
 }
